@@ -1,0 +1,56 @@
+# VAE Configuration
+data:
+  width: 32
+  height: 32
+  min_rooms: 3
+  max_rooms: 8
+  min_room_size: 3
+  max_room_size: 8
+  room_types: 5
+  num_train_samples: 10000
+  num_val_samples: 2000
+  batch_size: 32
+  num_workers: 4
+
+model:
+  model_type: "vae"
+  input_size: [32, 32]
+  latent_dim: 128
+  hidden_dims: [512, 256]
+  beta: 1.0
+  kl_annealing: true
+  use_spectral_norm: true
+
+training:
+  epochs: 100
+  learning_rate: 0.001
+  weight_decay: 0.00001
+  beta1: 0.5
+  beta2: 0.999
+  d_lr: 0.0001
+  g_lr: 0.0001
+  d_steps: 1
+  g_steps: 1
+  gradient_clip_val: 1.0
+  accumulate_grad_batches: 1
+  val_check_interval: 1.0
+  log_every_n_steps: 50
+  save_top_k: 3
+  monitor: "val_loss"
+
+# Paths
+data_dir: "data"
+model_dir: "models"
+log_dir: "logs"
+assets_dir: "assets"
+
+# Reproducibility
+seed: 42
+
+# Device
+device: "auto"
+
+# Logging
+use_wandb: false
+wandb_project: "generative-design-architecture"
+wandb_entity: null
